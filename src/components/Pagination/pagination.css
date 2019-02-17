@@ -1,0 +1,20 @@
+.wrap{
+  width: 45%;
+  margin-bottom: 10px;
+  margin-right: 0;
+  margin-left: auto;
+}
+
+.wrap p{
+  display: inline-block;
+  margin: 0 10px;
+}
+
+.wrap input{
+  width: 30px;
+  text-align: center;
+  border-radius: 0.25rem;
+  margin: 0 10px;
+  box-shadow: none;
+  border: 1px solid #ced4da;;
+}

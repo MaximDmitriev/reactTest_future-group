@@ -41,28 +41,30 @@ export default class Table extends Component {
 
   onSort = (name) => {
 
-    const direct = this.state.sortDirection === 'asc' ? -1 : 1;
+    if (this.state.items) {
+      const direct = this.state.sortDirection === 'asc' ? -1 : 1;
 
-    const sorted = this.state.items.sort((a, b) => {
-
-      if (a[name] > b[name]) {
-        return 1 * direct;
-      }
-      if (a[name] < b[name]) {
-        return -1 * direct;
-      }
-      if(a[name] === b[name]) {
-        return 0;
-      }
-    });
-
-    this.splitOnPages(sorted);
-
-    this.setState({
-      items: sorted,
-      sortName: name,
-      sortDirection: this.state.sortDirection === 'asc' ? 'desc' : 'asc'
-    });
+      const sorted = this.state.items.sort((a, b) => {
+  
+        if (a[name] > b[name]) {
+          return 1 * direct;
+        }
+        if (a[name] < b[name]) {
+          return -1 * direct;
+        }
+        if(a[name] === b[name]) {
+          return 0;
+        }
+      });
+  
+      this.splitOnPages(sorted);
+  
+      this.setState({
+        items: sorted,
+        sortName: name,
+        sortDirection: this.state.sortDirection === 'asc' ? 'desc' : 'asc'
+      });
+    }
   }
 
   onFilter = (filter) => {
@@ -191,8 +193,8 @@ export default class Table extends Component {
       this.dataLoad(nextProps.dataType);
     }
 
-    if (nextProps.filter !== this.props.filter) {
-      console.log('nextprops', nextProps);
+    if (nextProps.filter !== this.props.filter && this.state.items) {
+
       this.splitOnPages(this.onFilter(nextProps.filter));
     }
   }
